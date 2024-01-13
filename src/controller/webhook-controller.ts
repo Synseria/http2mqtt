@@ -10,10 +10,11 @@ export const webhookRouter = Router();
  */
 webhookRouter.post('/:application/:path*?',passport.authenticate('basic',{ session: false }),(req: Request,res: Response) => {
     const application = req.params.application;
-    const genericPath = req.params.path.replace(/\/$/gm,'') || '';
+    const genericPath = req.params.path?.replace(/\/$/gm,'') || '';
+    const body = JSON.stringify(req.body);
 
     //Publication du message
-    mqttService.publishMessage(`${application}/${genericPath}`,req.body).then(() => {
+    mqttService.publishMessage(`${application}/${genericPath}`,body).then(() => {
         //Succès
         res.status(200).send('OK');
     }).catch((error) => {

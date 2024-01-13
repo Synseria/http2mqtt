@@ -62,7 +62,9 @@ export class MQTTService {
     /**
      * Publication d'un message
      */
-    publishMessage(topic: string,message: string): Promise<void> {
+    publishMessage(path: string,message: string): Promise<void> {
+        const topic = `${this.mqttTopicPrefix}${path}`.replace(/\/$/gm,'');
+
         //Création d'une promesse
         return new Promise((resolve,reject) => {
             //Vérification de la connexion MQTT
@@ -75,13 +77,13 @@ export class MQTTService {
                 //Vérification de la présence d'erreur
                 if (err) {
                     //Log
-                    console.error(`[MQTT] Erreur lors de la publication du message sur le topic ${this.mqttTopicPrefix}${topic} `,err);
+                    console.log(`[MQTT] Erreur lors de la publication du message sur le topic ${topic} => ${message}`,err);
 
                     //Rejet de la promesse
                     reject(err);
                 } else {
                     //Log
-                    console.log(`[MQTT] Message publié avec succès sur le topic ${this.mqttTopicPrefix}${topic}`);
+                    console.log(`[MQTT] Message publié avec succès sur le topic ${topic} => ${message}`);
 
                     //Résolution de la promesse
                     resolve();

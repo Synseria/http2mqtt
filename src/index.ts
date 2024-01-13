@@ -12,6 +12,7 @@ dotenv.config();
 const app: Express = express();
 
 //Initialisation des middlewares
+app.use(express.json());
 initLogger(app);
 initPassport(app);
 initRouter(app);

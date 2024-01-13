@@ -18,7 +18,7 @@ HTTP2MQTT est une application qui offre un endpoint pour recevoir des webhooks e
     ```
 4. **Créez un fichier `.env` à la racine du projet et configurez les variables d'environnement suivantes :**
     ```env
-    PORT=3000
+    HTTP_PORT=3000
     HTTP_USERNAME=nom_utilisateur
     HTTP_PASSWORD=mot_de_passe
     MQTT_URL=mqtt_broker_url
@@ -48,7 +48,7 @@ L'application sera disponible à l'adresse : http://localhost:3000
 
 Exemple d'utilisation avec cURL :
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"message": "Le film \'Conjuring, les dossiers Warren\' a commencé."}' http://localhost:3000/webhook/plex/movies
+curl -X POST -H "Content-Type: application/json" -d '{"message": "Le film Conjuring, les dossiers Warren a commencé."}' http://localhost:3000/webhook/plex/movies
 ``````
 
 ### Authentification
